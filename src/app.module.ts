@@ -19,7 +19,7 @@ import { User } from './users/schema/user.model';
       port: 3306,
       username: process.env.DATABASE_USERNAME,
       password: process.env.DATABASE_PASSWORD,
-      database: process.env.DATABASE_PASSWORD,
+      database: process.env.NAME,
       models: [User]
     }),
 
