@@ -5,7 +5,9 @@ import { UsersModule } from './users/users.module';
 import { DataSource } from 'typeorm';
 import { ConfigModule } from '@nestjs/config'
 import { SequelizeModule } from '@nestjs/sequelize';
-import { User } from './users/schema/user.model';
+import { User } from './users/model/user.model';
+import { CodeModule } from './code/code.module';
+import { Code } from './code/model/code.model';
 
 @Module({
   imports: [
@@ -19,14 +21,15 @@ import { User } from './users/schema/user.model';
       port: 3306,
       username: process.env.DATABASE_USERNAME,
       password: process.env.DATABASE_PASSWORD,
-      database: process.env.NAME,
-      models: [User]
+      database: process.env.DATABASE_NAME,
+      models: [User, Code],
+      autoLoadModels: true,
+      synchronize: true // this maybe harmfull on production
     }),
-
-    UsersModule],
+    UsersModule,
+    CodeModule
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {
-  constructor(private dataSource: DataSource) { }
-}
+export class AppModule { }
