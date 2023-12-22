@@ -1,4 +1,5 @@
 // import { Model } from "sequelize";
+import { DataTypes } from "sequelize";
 import { Table, Model, Column, IsUUID, PrimaryKey, IsEmail, HasMany } from "sequelize-typescript";
 import { Code } from "src/code/model/code.model";
 
@@ -6,7 +7,9 @@ import { Code } from "src/code/model/code.model";
 export class User extends Model {
   @IsUUID(4)
   @PrimaryKey
-  @Column
+  @Column({
+    defaultValue: DataTypes.UUIDV4
+  })
   id: string
 
   @Column
@@ -22,6 +25,7 @@ export class User extends Model {
   @Column
   phone: string
 
+  // RELATIONSHIPS
   @HasMany(() => Code)
   codes: Code[];
 }

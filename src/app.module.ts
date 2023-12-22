@@ -8,6 +8,10 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { User } from './users/model/user.model';
 import { CodeModule } from './code/code.module';
 import { Code } from './code/model/code.model';
+import { PurchasesModule } from './purchases/purchases.module';
+import { Purchases } from './purchases/models/purchases.model';
+import { ReviewModule } from './review/review.module';
+import { Review } from './review/models/review.models';
 
 @Module({
   imports: [
@@ -22,12 +26,14 @@ import { Code } from './code/model/code.model';
       username: process.env.DATABASE_USERNAME,
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
-      models: [User, Code],
+      models: [User, Code, Purchases, Review],
       autoLoadModels: true,
       synchronize: true // this maybe harmfull on production
     }),
     UsersModule,
-    CodeModule
+    CodeModule,
+    PurchasesModule,
+    ReviewModule
   ],
   controllers: [AppController],
   providers: [AppService],
