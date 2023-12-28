@@ -1,19 +1,20 @@
-import { IsNotEmpty, IsNumber, IsString, IsEmail } from "class-validator";
+import { IsNotEmpty, IsNumber, IsString, IsEmail, IsOptional } from "class-validator";
 
 export class CreatePurchasesDto {
+  
   @IsString()
   @IsNotEmpty()
   code_id: string
 
-  @IsString()
+  @IsNumber()
   @IsNotEmpty()
-  author_id: string
+  quantity: number
 
   @IsNumber()
   @IsNotEmpty()
-  total_amount: string
+  total_amount: number
 
   @IsString()
-  @IsEmail()
-  email: string
+  @IsNotEmpty()
+  buyer_id: string
 }

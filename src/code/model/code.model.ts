@@ -1,4 +1,3 @@
-// import { Model } from "sequelize";
 import { DataTypes } from "sequelize";
 import { Table, Model, Column, PrimaryKey, IsUUID, ForeignKey, BelongsTo } from "sequelize-typescript";
 import { Purchases } from "src/purchases/models/purchases.model";
@@ -29,9 +28,6 @@ export class Code extends Model {
 
   @Column
   price: number
-
-  @Column
-  rating: number
 
   @Column
   code_file: string

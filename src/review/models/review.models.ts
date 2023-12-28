@@ -29,6 +29,5 @@ export class Review extends Model {
   // RELATIONSHIPS
   @BelongsTo(() => User)
   user: User
-
-  
+ 
 }

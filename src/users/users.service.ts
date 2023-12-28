@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { User } from './model/user.model';
 import { Sequelize } from 'sequelize-typescript';
 import { CreateUserDto } from './dto/user.createDto';
+import { UpdateUserDto } from './dto/user.updateDto';
 
 @Injectable()
 export class UsersService {
@@ -19,9 +20,9 @@ export class UsersService {
       where: { email: existingEmail }
     })
     if (existingUser) {
-      throw new NotFoundException('User already exist')
+      console.log("User already exist")
+      return existingUser
     }
-    // const createUser = new this.userModel(createUserDto)
     return await this.userModel.create<User>({ ...createUserDto })
 
   }
@@ -46,4 +47,15 @@ export class UsersService {
     }
     await userToDelete.destroy()
   }
-}
+
+  // UPDATE USER
+  async updateUserProfile(user_id: string, updateDto: UpdateUserDto): Promise<any> {
+    console.log('this is the id', user_id)
+    console.log("payload from service", updateDto)
+    const updated = await this.userModel.update(updateDto, {
+      where: {id: user_id}
+    })
+    console.log("updated", updated)
+    return updated
+  }
+ }
