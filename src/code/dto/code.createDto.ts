@@ -1,4 +1,6 @@
 import { IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
+import { HasMany } from "sequelize-typescript";
+import { Code } from "../model/code.model";
 
 export class CreateCodeDto {
   @IsString()
@@ -31,5 +33,6 @@ export class CreateCodeDto {
   @IsString()
   @IsOptional()
   category: string
+
 
 } 
