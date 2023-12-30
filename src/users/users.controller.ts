@@ -15,6 +15,13 @@ export class UsersController {
     return await this.userService.findAll()
   }
 
+  // LOGIN USER
+  @Post('/login')
+  async loginUser(@Body() credential: CreateUserDto): Promise<User> {
+    console.log('payload', credential)
+    return await this.userService.loginUser(credential)
+  }
+
   // POST NEW USER
   @Post()
   async createSingleUser(@Body() userService: CreateUserDto): Promise<any> {
@@ -34,6 +41,12 @@ export class UsersController {
   @Get(':id')
   async findOneById(@Param('id') id: string): Promise<User> {
     return await this.userService.findOneByid(id)
+  }
+
+  // GET USER BY EMAIL
+  @Post('/email')
+  async getUserByEmail(@Body() payload: CreateUserDto): Promise<User> {
+    return await this.userService.findByEmail(payload)
   }
 }
 

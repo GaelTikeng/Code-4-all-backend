@@ -25,6 +25,9 @@ export class User extends Model {
   @Column
   phone: string
 
+  @Column
+  password: string
+
   // RELATIONSHIPS
   @HasMany(() => Code)
   codes: Code[];
