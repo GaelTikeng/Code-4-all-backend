@@ -12,6 +12,7 @@ export class CreateCodeDto {
   title: string
 
   @IsString()
+  @IsNotEmpty()
   description: string
 
   @IsNumber()

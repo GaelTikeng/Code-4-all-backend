@@ -3,6 +3,7 @@ import { Code } from './model/code.model';
 import { InjectModel } from '@nestjs/sequelize';
 import { CreateCodeDto } from './dto/code.createDto';
 import { User } from 'src/users/model/user.model';
+import { UpdateCodeDto } from './dto/code.updateDto';
 
 @Injectable()
 export class CodeService {
@@ -59,21 +60,35 @@ export class CodeService {
     return userCode
   }
 
-  // FIND CODE BY CATEGORY
-  async findcodePerCategory(cat: string): Promise<Code[]> {
+  // FIND CODE BY PROGAMMING LANGUAGE
+  async findcodePerCategory(language: string): Promise<Code[]> {
     const categoryCode = await this.codeModel.findAll({
       where: {
-        category: cat
+        programming_language: language
       },
       include: {
         model: User
       }
     })
     if (!categoryCode) {
-      throw new NotFoundException('No code under such category')
+      throw new NotFoundException('No code with this programming language')
     }
     return categoryCode
 
+  }
+
+  // UPDATE CODE
+  async updateCode (
+    code_id: string,
+    user_id: string,
+    updateDto: UpdateCodeDto
+  ): Promise<any> {
+    return await this.codeModel.update(updateDto, {
+      where: {
+        id: code_id,
+        user_id: user_id
+      }
+    })
   }
 
 }
