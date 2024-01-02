@@ -1,7 +1,8 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { CodeService } from './code.service';
 import { Code } from './model/code.model';
 import { CreateCodeDto } from './dto/code.createDto';
+import { UpdateCodeDto } from './dto/code.updateDto';
 
 @Controller('code')
 export class CodeController {
@@ -44,5 +45,15 @@ export class CodeController {
   @Get('/category/:name')
   async findCodeByCategory (@Param('name') name: string): Promise<Code[]> {
     return await this.codeService.findcodePerCategory(name)
+  }
+
+  // UPDATE CODE SNIPPET
+  @Put(":id/:user_id")
+  async updateCode (
+    @Param('id') id: string,
+    @Param('user_id') user_id: string,
+    @Body() updateDto: UpdateCodeDto
+  ): Promise<Code> {
+    return await this.codeService.updateCode(id, user_id, updateDto)
   }
 }
