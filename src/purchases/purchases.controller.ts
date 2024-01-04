@@ -2,7 +2,7 @@ import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { PurchasesService } from './purchases.service';
 import { CreatePurchasesDto } from './dto/purchases.createDto';
 import { Purchases } from './models/purchases.model';
-
+ 
 @Controller('purchases')
 export class PurchasesController {
   constructor(private purchasesService: PurchasesService) {}
