@@ -1,5 +1,6 @@
-import { DataTypes } from "sequelize";
-import { BelongsTo, Column, ForeignKey, HasMany, IsEmail, IsUUID, Model, PrimaryKey, Table } from "sequelize-typescript";
+import { type } from "os";
+import { DataTypes, Sequelize } from "sequelize";
+import { BelongsTo, Column, DataType, ForeignKey, HasMany, IsEmail, IsUUID, Model, PrimaryKey, Table } from "sequelize-typescript";
 import { CodeController } from "src/code/code.controller";
 import { Code } from "src/code/model/code.model";
 import { User } from "src/users/model/user.model";

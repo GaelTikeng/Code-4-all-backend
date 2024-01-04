@@ -39,27 +39,32 @@ export class PurchasesService {
 
   // FIND ALL PURCHASES PER BUYER_ID
   async findAllPurchasesPerbuyerId(buyer_id: string): Promise<any[]> {
-    const allPurchases = await this.purchasesModel.findAll({
+    try {
+      const allPurchases = await this.purchasesModel.findAll({
 
-      where: {
-        buyer_id: buyer_id
-      },
-      // include: {
-      //   model: Code,
-      //   // as: 'code_sample',
-      // }
-    })
+        where: {
+          buyer_id: buyer_id
+        },
+        // include: {
+        //   model: Code,
+        //   // as: 'code_sample',
+        // }
+      })
+  
+      console.log('nested object', allPurchases[0].code_id)
+      const purchases = allPurchases.map(async (item) => {
+        const singleCode = await this.codeService.findSingleCode(item.code_id)
+        // console.log('this is single code', singleCode.dataValues)
+        console.log('singleCode', singleCode.dataValues)
+        return singleCode.dataValues
+      })
+      // console.log('this is purchases + code', purcheses)
+      return allPurchases
 
-    console.log('nested object', allPurchases[0].code_id)
-    const purchases = allPurchases.map(async (item) => {
-      const singleCode = await this.codeService.findSingleCode(item.code_id)
-      // console.log('this is single code', singleCode.dataValues)
-      console.log('singleCode', singleCode.dataValues)
-      return singleCode.dataValues
-    })
-    // console.log('this is purchases + code', purcheses)
-
-    return Promise.all(purchases)
-
+  
+    } catch (error) {
+      console.log(error)
+    }
+    
   }
 }
