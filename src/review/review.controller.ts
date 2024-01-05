@@ -3,14 +3,15 @@ import { ReviewService } from './review.service';
 import { Review } from './models/review.models';
 import { CreateReviewDto } from './dto/review.createDto';
 import { UpdateReviewDto } from './dto/review.updateDto';
+import { ReviewModule } from './review.module';
 
 @Controller('review')
 export class ReviewController {
-  constructor(private reviewService: ReviewService) {}
+  constructor(private reviewService: ReviewService) { }
 
   // GET ALL REVIEWS
   @Get()
-  async getAllReviews (): Promise<Review[]> {
+  async getAllReviews(): Promise<Review[]> {
     return await this.reviewService.findAll()
   }
 
@@ -26,15 +27,23 @@ export class ReviewController {
     @Param('id') id: string,
     @Param('userId') userId: string,
     @Body() updateRev: UpdateReviewDto): Promise<Review> {
-      return await this.reviewService.updateReview(id, userId, updateRev)
-    }
+    return await this.reviewService.updateReview(id, userId, updateRev)
+  }
 
-    // DELATE REVIEW
-    @Delete(':id/:userId')
-    async deleteRev (
-      @Param('id') id: string,
-      @Param('userId') userId: string
-    ): Promise<Review> {
-      return this.reviewService.deleteRevById(id, userId)
-    }
- }
+  // DELATE REVIEW
+  @Delete(':id/:userId')
+  async deleteRev(
+    @Param('id') id: string,
+    @Param('userId') userId: string
+  ): Promise<Review> {
+    return this.reviewService.deleteRevById(id, userId)
+  }
+
+  // GET ALL REVIEWS PER CODEID
+  @Get(':codeId')
+  async findReviewByCodeId (
+    @Param('codeId') codeId: string
+  ): Promise<Review[]> {
+    return this.reviewService.getReviewPerCodeId(codeId)
+  }
+}

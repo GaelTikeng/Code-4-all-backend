@@ -8,7 +8,8 @@ import { User } from 'src/users/model/user.model';
 @Injectable()
 export class ReviewService {
   constructor(
-    @InjectModel(Review) private reviewModel: typeof Review
+    @InjectModel(Review)
+    private reviewModel: typeof Review
   ) { }
 
   //FIND ALL REVIEW
@@ -26,6 +27,8 @@ export class ReviewService {
 
   // CREATE NEW REVIEW
   async createNewReview(reviewDto: CreateReviewDto): Promise<Review> {
+    console.log('this is rating', reviewDto.rating, "this is codeId", reviewDto.code_id)
+
     return await this.reviewModel.create({ ...reviewDto })
   }
 
@@ -48,6 +51,18 @@ export class ReviewService {
       where: {
         id: id,
         user_id: user_id
+      }
+    })
+  }
+
+  // GET REVIEW PER CODEID
+  async getReviewPerCodeId(id: string): Promise<Review[]> {
+    return await this.reviewModel.findAll({
+      where: {
+        code_id: id
+      },
+      include: {
+        model: User
       }
     })
   }
