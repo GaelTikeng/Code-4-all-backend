@@ -74,7 +74,6 @@ export class CodeService {
       throw new NotFoundException('No code with this programming language')
     }
     return categoryCode
-
   }
 
   // UPDATE CODE
@@ -100,4 +99,5 @@ export class CodeService {
     })
   }
 
+  // FUNCTION 
 }
