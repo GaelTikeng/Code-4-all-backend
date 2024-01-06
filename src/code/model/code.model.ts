@@ -33,7 +33,7 @@ export class Code extends Model {
   code_file: string
 
   @Column
-  rating: number
+  rating: number 
 
   @Column
   programming_language: string

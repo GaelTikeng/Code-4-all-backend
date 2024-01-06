@@ -91,4 +91,13 @@ export class CodeService {
     })
   }
 
+  // FXN USED IN REVIEWSERVICE
+  async insertRating (codeId: string, rating: UpdateCodeDto): Promise<any> {
+    return await this.codeModel.update(rating, {
+      where: {
+        code_id: codeId
+      }
+    })
+  }
+
 }
