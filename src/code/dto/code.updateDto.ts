@@ -1,4 +1,5 @@
 import { IsNumber, IsOptional, IsString } from "class-validator";
+import { Is } from "sequelize-typescript";
 
 export class UpdateCodeDto {
   @IsString()
@@ -24,5 +25,9 @@ export class UpdateCodeDto {
   @IsString()
   @IsOptional()
   category: string
+
+  @IsNumber()
+  @IsOptional()
+  rating: number
   
 }

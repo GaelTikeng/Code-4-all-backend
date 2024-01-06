@@ -1,5 +1,5 @@
 
-export interface Review {
+export interface Reviews {
   id?: string
   user_id: string
   code_id: string
