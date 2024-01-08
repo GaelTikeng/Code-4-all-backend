@@ -1,6 +1,7 @@
 import { DataTypes } from "sequelize";
-import { Table, Model, Column, PrimaryKey, IsUUID, ForeignKey, BelongsTo } from "sequelize-typescript";
+import { Table, Model, Column, PrimaryKey, IsUUID, ForeignKey, BelongsTo, HasMany } from "sequelize-typescript";
 import { Purchases } from "src/purchases/models/purchases.model";
+import { Review } from "src/review/models/review.models";
 import { User } from "src/users/model/user.model";
 
 @Table
@@ -19,6 +20,10 @@ export class Code extends Model {
   @ForeignKey(() => Purchases)
   @Column
   purchase_id: string
+
+  // @ForeignKey(() => Review)
+  // @Column
+  // review_id: string
 
   @Column
   title: string
@@ -47,4 +52,7 @@ export class Code extends Model {
 
   @BelongsTo(() => Purchases)
   purchase: Purchases
+
+  // @HasMany(() => Review)
+  // review: Review[]
 }

@@ -4,6 +4,7 @@ import { InjectModel } from '@nestjs/sequelize';
 import { CreateCodeDto } from './dto/code.createDto';
 import { User } from 'src/users/model/user.model';
 import { UpdateCodeDto } from './dto/code.updateDto';
+import { Review } from 'src/review/models/review.models';
 
 @Injectable()
 export class CodeService {
@@ -47,17 +48,21 @@ export class CodeService {
   }
 
   // FIND ALL CODES PER USER_ID
-  async findCodePerUserId(user_id: string): Promise<Code[]> {
-    console.log('user_id from codeService', user_id)
-    const userCode: Code[] = await this.codeModel.findAll({
-      where: {
-        user_id: user_id
+  async findCodePerUserId(user_id: string): Promise<any[]> {
+    try {
+      console.log('user_id from codeService', user_id)
+      const userCode = await this.codeModel.findAll({
+        where: {
+          user_id: user_id
+        }
+      })
+      if (!userCode) {
+        throw new NotFoundException("You have not uploaded a code yet")
       }
-    })
-    if (!userCode) {
-      throw new NotFoundException("You have not uploaded a code yet")
+      return userCode
+    } catch(err) {
+      console.log(err)
     }
-    return userCode
   }
 
   // FIND CODE BY PROGAMMING LANGUAGE
@@ -77,7 +82,7 @@ export class CodeService {
   }
 
   // UPDATE CODE
-  async updateCode (
+  async updateCode(
     code_id: string,
     user_id: string,
     updateDto: UpdateCodeDto
@@ -91,7 +96,7 @@ export class CodeService {
   }
 
   // FXN USED IN REVIEWSERVICE
-  async insertRating (codeId: string, rating: UpdateCodeDto): Promise<any> {
+  async insertRating(codeId: string, rating: UpdateCodeDto): Promise<any> {
     return await this.codeModel.update(rating, {
       where: {
         code_id: codeId

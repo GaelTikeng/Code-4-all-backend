@@ -5,8 +5,8 @@ import { Sequelize } from 'sequelize-typescript';
 import { CreatePurchasesDto } from './dto/purchases.createDto';
 import { UsersService } from 'src/users/users.service';
 import { User } from 'src/users/model/user.model';
-import { Code } from 'typeorm';
 import { CodeService } from 'src/code/code.service';
+import { Code } from 'src/code/model/code.model';
 
 @Injectable()
 export class PurchasesService {
@@ -41,14 +41,13 @@ export class PurchasesService {
   async findAllPurchasesPerbuyerId(buyer_id: string): Promise<any[]> {
     try {
       const allPurchases = await this.purchasesModel.findAll({
-
         where: {
           buyer_id: buyer_id
         },
-        // include: {
-        //   model: Code,
-        //   // as: 'code_sample',
-        // }
+        include: {
+          model: Code
+          // as: 'codeObj',
+        }
       })
   
       console.log('nested object', allPurchases[0].code_id)

@@ -7,13 +7,15 @@ import { User } from 'src/users/model/user.model';
 import { CodeService } from 'src/code/code.service';
 import { UpdateCodeDto } from 'src/code/dto/code.updateDto';
 import { Reviews } from './inteface/review.interface';
+import { Code } from 'src/code/model/code.model';
 
 @Injectable()
 export class ReviewService {
   constructor(
     @InjectModel(Review)
     private reviewModel: typeof Review,
-    private codeService: CodeService
+    private codeService: CodeService,
+    // private codeModel: typeof Code
   ) { }
 
   //FIND ALL REVIEW
@@ -31,16 +33,22 @@ export class ReviewService {
 
   // CREATE NEW REVIEW
 
-  async createNewReview(reviewDto: Reviews): Promise<Review> {
+  async createNewReview(reviewDto: CreateReviewDto): Promise<Review> {
     try {
       console.log('this is rating', reviewDto.rating, "this is codeId", reviewDto.code_id)
-      const rating = reviewDto
+      const returnedObj = this.reviewModel.create({ ...reviewDto })
+      // const { rating }: UpdateCodeDto = reviewDto
       // update code with rating
-      // const updatedCode = await this.codeService.insertRating(reviewDto.code_id, reviewDto.rating)
+      // const updatedCode = await this.codeService.insertRating(reviewDto.code_id, { rating: reviewDto.rating })
+      // const updateCode = await this.codeModel.update(reviewDto.rating, {
+      //   where: {
+      //     code_id: reviewDto.code_id
+      //   }
+      // })
 
-      return await this.reviewModel.create({ ...reviewDto })
+      return await returnedObj
     }
-    catch(err) {
+    catch (err) {
       console.log(err)
     }
   }
