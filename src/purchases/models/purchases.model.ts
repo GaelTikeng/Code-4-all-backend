@@ -1,6 +1,6 @@
 import { type } from "os";
 import { DataTypes, Sequelize } from "sequelize";
-import { BelongsTo, Column, DataType, ForeignKey, HasMany, IsEmail, IsUUID, Model, PrimaryKey, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, ForeignKey, HasMany, HasOne, IsEmail, IsUUID, Model, PrimaryKey, Table } from "sequelize-typescript";
 import { CodeController } from "src/code/code.controller";
 import { Code } from "src/code/model/code.model";
 import { User } from "src/users/model/user.model";
@@ -15,7 +15,7 @@ export class Purchases extends Model {
   id: string
 
   @ForeignKey(() => Code)
-  @Column
+  @Column({ type: DataTypes.STRING(1048576) })
   code_id: string
 
   @ForeignKey(() => User)
@@ -33,8 +33,8 @@ export class Purchases extends Model {
   quantity: number
 
   // RELATIONSHIP
-  @HasMany(() => Code)
-  code: Code[]
+  @HasOne(() => Code)
+  codeObj: Code[]
 
   @BelongsTo(() => User)
   user: User
