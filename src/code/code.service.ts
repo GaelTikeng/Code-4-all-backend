@@ -99,7 +99,7 @@ export class CodeService {
   async insertRating(codeId: string, rating: UpdateCodeDto): Promise<any> {
     return await this.codeModel.update(rating, {
       where: {
-        code_id: codeId
+        id: codeId
       }
     })
   }

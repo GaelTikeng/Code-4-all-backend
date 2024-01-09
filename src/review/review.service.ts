@@ -33,20 +33,23 @@ export class ReviewService {
 
   // CREATE NEW REVIEW
 
-  async createNewReview(reviewDto: CreateReviewDto): Promise<Review> {
+  async createNewReview(reviewDto: CreateReviewDto): Promise<any> {
     try {
       console.log('this is rating', reviewDto.rating, "this is codeId", reviewDto.code_id)
       const returnedObj = this.reviewModel.create({ ...reviewDto })
-      // const { rating }: UpdateCodeDto = reviewDto
       // update code with rating
-      // const updatedCode = await this.codeService.insertRating(reviewDto.code_id, { rating: reviewDto.rating })
-      // const updateCode = await this.codeModel.update(reviewDto.rating, {
-      //   where: {
-      //     code_id: reviewDto.code_id
-      //   }
-      // })
+      const currentCode = await this.codeService.findSingleCode(reviewDto.code_id)
+      const updatedCode = await this.codeService.insertRating(reviewDto.code_id, {
+        rating: reviewDto.rating,
+        title: currentCode.title,
+        description: currentCode.desctription,
+        price: currentCode.price,
+        code_file: currentCode.code_file,
+        Programming_language: currentCode.programming_language,
+        category: currentCode.category
+      })
 
-      return await returnedObj
+      return await updatedCode
     }
     catch (err) {
       console.log(err)
