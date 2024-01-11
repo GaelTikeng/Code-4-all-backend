@@ -64,7 +64,6 @@ export class CodeService {
       console.log(err)
     }
   }
-
   // FIND CODE BY PROGAMMING LANGUAGE
   async findcodePerCategory(cat: string): Promise<Code[]> {
     const categoryCode = await this.codeModel.findAll({
