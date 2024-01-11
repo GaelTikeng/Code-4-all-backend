@@ -66,10 +66,10 @@ export class CodeService {
   }
 
   // FIND CODE BY PROGAMMING LANGUAGE
-  async findcodePerCategory(language: string): Promise<Code[]> {
+  async findcodePerCategory(cat: string): Promise<Code[]> {
     const categoryCode = await this.codeModel.findAll({
       where: {
-        programming_language: language
+        category: cat
       },
       include: {
         model: User
