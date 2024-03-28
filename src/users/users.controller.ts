@@ -33,14 +33,17 @@ export class UsersController {
   async updateUser(
     @Param('id') id: string,
     @Body() payloadToUpdate: UpdateUserDto
-    ): Promise<User> {
+  ): Promise<User> {
     return this.userService.updateUserProfile(id, payloadToUpdate)
   }
 
   // GET SINGLE USER BY ID
   @Get(':id')
-  async findOneById(@Param('id') id: string): Promise<User> {
-    return await this.userService.findOneByid(id)
+  async findOneById(@Param('id') id: string): Promise<User | Object> {
+    const foundUser = await this.userService.findOneByid(id)
+    if (foundUser) {
+      return foundUser
+    } else return { message: "User not found" }
   }
 
   // GET USER BY EMAIL
