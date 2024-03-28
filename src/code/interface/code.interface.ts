@@ -7,5 +7,6 @@ export interface Code {
   rating: number
   code_file: string
   programming_language: string
-  category: string
+  category: string,
+  thumbnail: string,
 }

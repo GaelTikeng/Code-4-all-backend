@@ -35,5 +35,8 @@ export class CreateCodeDto {
   @IsOptional()
   category: string
 
+  @IsString()
+  @IsOptional()
+  thumbnail: string
 
 } 

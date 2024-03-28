@@ -29,7 +29,7 @@ export class Code extends Model {
   title: string
 
   @Column
-  desctription: string
+  description: string
 
   @Column
   price: number
@@ -45,6 +45,9 @@ export class Code extends Model {
 
   @Column
   category: string
+
+  @Column
+  thumbnail: string
 
   // RELATIONSHIPS
   @BelongsTo(() => User)

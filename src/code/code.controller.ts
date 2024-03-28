@@ -17,7 +17,9 @@ export class CodeController {
   // CREATE CODE
   @Post()
   async createCode(@Body() codePayload: CreateCodeDto): Promise<Code> {
-    return this.codeService.createCode(codePayload)
+    const createdCode = await this.codeService.createCode(codePayload)
+    console.log("created code from controler", createdCode)
+    return createdCode
   }
 
   // get a code by Id
