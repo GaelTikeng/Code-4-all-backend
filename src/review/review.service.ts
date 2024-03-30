@@ -42,11 +42,12 @@ export class ReviewService {
       const updatedCode = await this.codeService.insertRating(reviewDto.code_id, {
         rating: reviewDto.rating,
         title: currentCode.title,
-        description: currentCode.desctription,
+        description: currentCode.description,
         price: currentCode.price,
         code_file: currentCode.code_file,
         Programming_language: currentCode.programming_language,
-        category: currentCode.category
+        category: currentCode.category,
+        thumbnail: currentCode.thumbnail
       })
 
       return await updatedCode

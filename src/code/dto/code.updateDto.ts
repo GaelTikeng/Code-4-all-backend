@@ -30,5 +30,8 @@ export class UpdateCodeDto {
   @IsOptional()
   rating: number
 
+  @IsString()
+  @IsOptional()
+  thumbnail: string
   
 }
