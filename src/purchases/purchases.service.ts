@@ -57,10 +57,7 @@ export class PurchasesService {
         console.log('singleCode', singleCode.dataValues)
         return singleCode.dataValues
       })
-      // console.log('this is purchases + code', purcheses)
-      return allPurchases
-
-  
+      return allPurchases  
     } catch (error) {
       console.log(error)
     }

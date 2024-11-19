@@ -38,10 +38,10 @@ export class CodeService {
   }
 
   // DELETE CODE
-  async deleteCodeById(id: string, user_id: string): Promise<any> {
+  async deleteCodeById(code_id: string, user_id: string): Promise<any> {
     return await this.codeModel.destroy({
       where: {
-        id: id,
+        id: code_id,
         user_id: user_id
       }
     })
