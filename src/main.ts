@@ -9,7 +9,7 @@ async function bootstrap() {
   app.enableCors()
   await app.listen(PORT, async () => {
     console.log(
-      `Server up and running on ${environment} mode on ${process.env.LOCAL_API_URL}`
+      `Server up and running on ${environment} mode on ${environment === "production" ? process.env.PROD_API_UR : process.env.LOCAL_API_URL}`
     )
   });
 }
