@@ -31,9 +31,9 @@ export class CodeController {
   // DELETE CODE SNIPPET
   @Delete('id/:author_id')
   async deleteCode(
-    @Param('id') id: string,
+    @Param('id') code_id: string,
     @Param("author_id") author_id: string): Promise<Code> {
-    return await this.codeService.deleteCodeById(id, author_id)
+    return await this.codeService.deleteCodeById(code_id, author_id)
   }
 
   // GET ALL CODES PER USER
