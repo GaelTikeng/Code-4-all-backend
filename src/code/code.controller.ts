@@ -36,7 +36,7 @@ export class CodeController {
     return await this.codeService.deleteCodeById(code_id, author_id)
   }
 
-  // GET ALL CODES PER USE
+  // GET ALL CODES PER USEr
   @Get('/user_code/:id')
   async getAllCodePerUser(@Param('id') user_id: string): Promise<Code[]> {
     console.log('from codeController', user_id)
